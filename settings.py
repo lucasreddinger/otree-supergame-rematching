@@ -1,11 +1,12 @@
 from os import environ
 
 SESSION_CONFIGS = [
-    # dict(
-    #     name='public_goods',
-    #     app_sequence=['public_goods'],
-    #     num_demo_participants=3,
-    # ),
+    dict(
+        name='supergame_rematching',
+        display_name='supergames with random rematching',
+        num_demo_participants=4,
+        app_sequence=['supergame_rematching'],
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
