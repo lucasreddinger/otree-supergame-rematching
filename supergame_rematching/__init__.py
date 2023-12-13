@@ -2,7 +2,7 @@ from otree.api import *
 
 
 doc = """
-Supergames consisting of multiple rounds each
+Supergames consisting of multiple rounds each, with random rematching between supergames
 """
 
 
@@ -17,7 +17,7 @@ def cumsum(lst):
 
 class C(BaseConstants):
     NAME_IN_URL = 'supergames'
-    PLAYERS_PER_GROUP = None
+    PLAYERS_PER_GROUP = 2
 
     # first supergame lasts 2 rounds, second supergame lasts 3 rounds, etc...
     ROUNDS_PER_SG = [2, 3, 4, 5]
@@ -30,6 +30,8 @@ class Subsession(BaseSubsession):
     sg = models.IntegerField()
     period = models.IntegerField()
     is_last_period = models.BooleanField()
+    #### for debugging. mark this True when a subsession has been rematched
+    rematched = models.BooleanField()
 
 
 def creating_session(subsession: Subsession):
@@ -48,6 +50,25 @@ def creating_session(subsession: Subsession):
                 period = 1
             else:
                 period += 1
+
+    """
+    expected behavior:
+        for each round with subsession.period == 1
+            randomly rematch participants
+            mark subsession.rematched = True
+        else
+            mark subsession.rematched = False
+
+    actual behavior:
+        for every round, participants are rematched.
+        however subsession.rematched is marked as expected!
+    
+    """
+    if subsession.period == 1:
+        subsession.group_randomly()
+        subsession.rematched = True
+    else:
+        subsession.rematched = False
 
 
 class Group(BaseGroup):
