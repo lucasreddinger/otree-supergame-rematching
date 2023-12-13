@@ -12,5 +12,5 @@ Here I have taken the "supergames" app from [otree-snippets](https://www.otreehu
       - for every round, participants are rematched.
       - however `subsession.rematched` is changed as expected!
 
-[Please see my commit 174a979.](https://github.com/lucasreddinger/otree-supergame-rematching/commit/174a97903c9846140ad9ea91bf30d790523b5fd8
+[Please see my commit 174a979.](https://github.com/lucasreddinger/otree-supergame-rematching/commit/174a97903c9846140ad9ea91bf30d790523b5fd8)
 
